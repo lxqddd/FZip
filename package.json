@@ -2,10 +2,17 @@
   "name": "@xy/fzip",
   "version": "0.0.1",
   "description": "一个将文件压缩为zip格式的命令行工具",
-  "main": "index.js",
+  "main": "src/cli.ts",
   "scripts": {
-    "dev": "ts-node ./src/index.ts"
+    "dev": "ts-node ./src/cli.ts",
+    "build": "tsc"
   },
+  "bin": {
+    "fzip": "src/cli.ts"
+  },
+  "files": [
+    "dist/**/*.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lxqddd/FZip.git"
@@ -23,13 +30,22 @@
   },
   "homepage": "https://github.com/lxqddd/FZip#readme",
   "devDependencies": {
+    "@types/minimist": "^1.2.2",
     "@types/node": "^17.0.35",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
+    "del": "^6.1.0",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.2",
+    "gulp": "^4.0.2",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-uglify": "^3.0.2",
     "ts-node": "^10.8.0",
     "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "minimist": "^1.2.6"
   }
 }
