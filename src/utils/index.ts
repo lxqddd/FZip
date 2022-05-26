@@ -29,3 +29,11 @@ export function getFileName(pathName: string) {
   }
   return path.basename(pathName)
 }
+
+export function getFileNameWithExt(pathName: string) {
+  return path.basename(pathName)
+}
+
+export function getDirName(pathName: string) {
+  return path.dirname(pathName)
+}
