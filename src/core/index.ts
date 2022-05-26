@@ -1,14 +1,17 @@
 import * as fs from 'fs'
-import * as path from 'path'
 import archiver from 'archiver'
+import * as path from 'path'
+import { resolvePath } from '../utils'
 
-const pwd = process.cwd()
+export function compress(level: number = 6) {
+  const output = fs.createWriteStream(path.join(resolvePath('/asd'), '/example.zip'))
+  const archive = archiver('zip', {
+    zlib: {
+      level
+    }
+  })
 
-export function resolvePath(pathName: string): string {
-  if (path.isAbsolute(pathName)) {
-    return pathName
-  }
-  return path.join(pwd, pathName)
+  archive.pipe(output)
 }
 
 export default {}
