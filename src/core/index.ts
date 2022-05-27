@@ -5,7 +5,11 @@ import {
   getFileName, resolvePath, getDirName, getExtName, getFileNameWithExt
 } from '../utils'
 
-function compressSingleFile(inputPathName: string, outputPathName: string, level: number = 6) {
+export function compressSingleFile(
+  inputPathName: string,
+  outputPathName: string,
+  level: number = 6
+) {
   const output = fs.createWriteStream(path.join(resolvePath(outputPathName), `${getFileName(inputPathName)}.zip`))
   const archive = archiver('zip', {
     zlib: {
@@ -17,6 +21,8 @@ function compressSingleFile(inputPathName: string, outputPathName: string, level
   archive.append(stream, {
     name: getFileNameWithExt(inputPathName)
   })
+
+  archive.finalize()
 }
 
 export default {}
