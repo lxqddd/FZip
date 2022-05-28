@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import archiver from 'archiver'
 import * as path from 'path'
 import {
-  getFileName, resolvePath, getDirName, getExtName, getFileNameWithExt
+  resolvePath, getDirName, getFileNameWithExt
 } from '../utils'
 import { ICompressParams } from '../types'
 
