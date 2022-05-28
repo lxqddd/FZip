@@ -1,11 +1,11 @@
 #! /usr/bin/env node
 
 import argv from 'minimist'
-import { compressDir, compressSingleFile } from './core'
+import compress from './core'
 import { ICompressParams } from './types'
 import { formatCompressParams } from './utils'
 
 const argvObj = argv(process.argv.slice(2))
 const compressParams: ICompressParams = formatCompressParams(argvObj)
-compressSingleFile(compressParams)
-// compressDir(compressParams)
+
+compress(compressParams)

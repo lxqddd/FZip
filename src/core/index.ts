@@ -2,12 +2,11 @@ import * as fs from 'fs'
 import archiver from 'archiver'
 import * as path from 'path'
 import {
-  resolvePath, getFileNameWithExt
+  resolvePath, getFileNameWithExt, isFile
 } from '../utils'
 import { ICompressParams } from '../types'
 
 export function compressSingleFile(compressParams: ICompressParams) {
-  console.log(compressParams)
   const output = fs.createWriteStream(path.join(
     resolvePath(compressParams.outputPathName),
     `${compressParams.outputFileName}.zip`
@@ -40,4 +39,12 @@ export function compressDir(compressParams: ICompressParams) {
   archive.pipe(output)
   archive.directory(compressParams.inputPathName, compressParams.outputFileName)
   archive.finalize()
+}
+
+export default function compress(compressParams: ICompressParams) {
+  if (isFile(compressParams.inputPathName)) {
+    compressSingleFile(compressParams)
+  } else {
+    compressDir(compressParams)
+  }
 }
