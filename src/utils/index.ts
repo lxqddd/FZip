@@ -43,10 +43,18 @@ export function getDirName(pathName: string) {
 export function formatCompressParams(argv: argv.ParsedArgs): ICompressParams {
   const {
     f: inputPathName,
-    o: outputPathName = inputPathName,
     l: level = 6,
     n: outputFileName = argv.n || getFileName(inputPathName)
   } = argv
+
+  let outputPathName = argv.o
+  if (!outputPathName) {
+    if (isFile(inputPathName)) {
+      outputPathName = getDirName(inputPathName)
+    } else {
+      outputPathName = inputPathName
+    }
+  }
 
   return {
     inputPathName,
