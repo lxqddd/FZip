@@ -4,22 +4,26 @@ import * as path from 'path'
 import {
   getFileName, resolvePath, getDirName, getExtName, getFileNameWithExt
 } from '../utils'
+import { ICompressParams } from '../types'
 
 export function compressSingleFile(
-  inputPathName: string,
-  outputPathName: string,
-  level: number = 6
+  compressParams: ICompressParams
 ) {
-  const output = fs.createWriteStream(path.join(resolvePath(outputPathName), `${getFileName(inputPathName)}.zip`))
+  console.log(compressParams)
+  const output = fs.createWriteStream(path.join(
+    getDirName(resolvePath(compressParams.inputPathName)),
+    `${compressParams.outputFileName}.zip`
+  ))
+
   const archive = archiver('zip', {
     zlib: {
-      level
+      level: compressParams.level
     }
   })
   archive.pipe(output)
-  const stream = fs.createReadStream(resolvePath(inputPathName))
+  const stream = fs.createReadStream(resolvePath(compressParams.inputPathName))
   archive.append(stream, {
-    name: getFileNameWithExt(inputPathName)
+    name: getFileNameWithExt(compressParams.inputPathName)
   })
 
   archive.finalize()

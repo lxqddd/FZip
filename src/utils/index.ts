@@ -1,5 +1,7 @@
 import * as path from 'path'
 import * as fs from 'fs'
+import argv from 'minimist'
+import { ICompressParams } from '../types'
 
 export const pwd = process.cwd()
 
@@ -36,4 +38,20 @@ export function getFileNameWithExt(pathName: string) {
 
 export function getDirName(pathName: string) {
   return path.dirname(pathName)
+}
+
+export function formatCompressParams(argv: argv.ParsedArgs): ICompressParams {
+  const {
+    f: inputPathName,
+    o: outputPathName = inputPathName,
+    l: level = 6,
+    n: outputFileName = argv.n || getFileName(inputPathName)
+  } = argv
+
+  return {
+    inputPathName,
+    outputPathName,
+    level,
+    outputFileName
+  }
 }
