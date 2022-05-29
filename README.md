@@ -55,11 +55,17 @@ pnpm install @lxqddd/fzip -g
 ```
 
 - 基础用法
+
   - `fzip -f ./src`，指令执行之后会在 `src` 的同级目录输出一个 `src.zip` 的压缩包
+
 - 指定输出位置
+
   - `fzip -f ./src -o ~/Desktop`，指令执行之后会在桌面上输出一个 `src.zip` 的压缩包
+
 - 指定压缩等级
+
   - `fzip -f ./src -o ~/Desktop -l 9`，压缩产物的压缩级别为 9
+
 - 重命名
   - `fzip -f ./src -n test`，指令执行之后会在 `src` 的通级目录下输出一个名为 `test.zip` 的压缩包
 
