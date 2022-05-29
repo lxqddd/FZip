@@ -2,16 +2,21 @@
   "name": "@xy/fzip",
   "version": "0.0.1",
   "description": "一个将文件压缩为zip格式的命令行工具",
-  "main": "src/cli.ts",
+  "main": "dist/cli.js",
+  "types": "dist/cli.d.ts",
   "scripts": {
     "dev": "ts-node ./src/cli.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "publish": "sh publish.sh"
   },
   "bin": {
-    "fzip": "src/cli.ts"
+    "fzip": "dist/cli.js"
   },
   "files": [
-    "dist/**/*.js"
+    "dist/",
+    "README.md",
+    "package.json",
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
