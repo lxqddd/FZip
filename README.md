@@ -49,7 +49,6 @@ pnpm install @xy/fzip -g
 │   │   └── index.ts
 │   └── utils
 │       └── index.ts
-├── tree.md
 ├── tsconfig.json
 └── yarn.lock
 
@@ -60,7 +59,7 @@ pnpm install @xy/fzip -g
 - 指定输出位置
   - `fzip -f ./src -o ~/Desktop`，指令执行之后会在桌面上输出一个 `src.zip` 的压缩包
 - 指定压缩等级
-  - `fzip -f ./src -o ~/Desktop -l 9`，压缩产物的压缩级别为9
+  - `fzip -f ./src -o ~/Desktop -l 9`，压缩产物的压缩级别为 9
 - 重命名
   - `fzip -f ./src -n test`，指令执行之后会在 `src` 的通级目录下输出一个名为 `test.zip` 的压缩包
 
