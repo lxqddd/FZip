@@ -9,19 +9,19 @@
 - 使用 `npm` 安装
 
 ```shell
-npm install @xy/fzip -g
+npm install @lxqddd/fzip -g
 ```
 
 - 使用 `yarn` 安装
 
 ```shell
-yarn install @xy/fzip -g
+yarn install @lxqddd/fzip -g
 ```
 
 - 使用 `pnpm` 安装
 
 ```shell
-pnpm install @xy/fzip -g
+pnpm install @lxqddd/fzip -g
 ```
 
 ## 参数说明

@@ -1,13 +1,12 @@
 {
-  "name": "@xy/fzip",
+  "name": "@lxqddd/fzip",
   "version": "0.0.1",
   "description": "一个将文件压缩为zip格式的命令行工具",
   "main": "dist/cli.js",
   "types": "dist/cli.d.ts",
   "scripts": {
     "dev": "ts-node ./src/cli.ts",
-    "build": "tsc",
-    "publish": "sh publish.sh"
+    "build": "tsc"
   },
   "bin": {
     "fzip": "dist/cli.js"
@@ -52,6 +51,7 @@
     "typescript": "^4.6.4"
   },
   "dependencies": {
+    "@lxqddd/fzip": "^0.0.1",
     "archiver": "^5.3.1",
     "minimist": "^1.2.6"
   }
