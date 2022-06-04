@@ -1,17 +1,19 @@
 import * as fs from 'fs'
 import archiver from 'archiver'
 import * as path from 'path'
+import CliProgress from 'cli-progress'
+import ansiColors from 'ansi-colors'
 import {
-  resolvePath, getFileNameWithExt, isFile
+  resolvePath, getFileNameWithExt, isFile, getDirSize
 } from '../utils'
 import { ICompressParams } from '../types'
 
-export function compressSingleFile(compressParams: ICompressParams) {
-  const output = fs.createWriteStream(path.join(
+function compressSingleFile(compressParams: ICompressParams) {
+  const destPath = path.join(path.join(
     resolvePath(compressParams.outputPathName),
     `${compressParams.outputFileName}.zip`
   ))
-
+  const output = fs.createWriteStream(destPath)
   const archive = archiver('zip', {
     zlib: {
       level: compressParams.level
@@ -22,15 +24,16 @@ export function compressSingleFile(compressParams: ICompressParams) {
   archive.append(stream, {
     name: getFileNameWithExt(compressParams.inputPathName)
   })
-
   archive.finalize()
 }
 
-export function compressDir(compressParams: ICompressParams) {
-  const output = fs.createWriteStream(path.join(
+function compressDir(compressParams: ICompressParams) {
+  const dirSize = getDirSize(compressParams.inputPathName)
+  const destPath = path.join(path.join(
     resolvePath(compressParams.outputPathName),
     `${compressParams.outputFileName}.zip`
   ))
+  const output = fs.createWriteStream(destPath)
   const archive = archiver('zip', {
     zlib: {
       level: compressParams.level
@@ -38,6 +41,19 @@ export function compressDir(compressParams: ICompressParams) {
   })
   archive.pipe(output)
   archive.directory(compressParams.inputPathName, compressParams.outputFileName)
+  const progressBar = new CliProgress.SingleBar({
+    format: `压缩进度 |${ansiColors.green('{bar}')}| {percentage}%`,
+    barCompleteChar: '\u2588',
+    barIncompleteChar: '\u2591',
+    hideCursor: true
+  })
+  progressBar.start(dirSize, 0)
+  archive.on('progress', (progress) => {
+    progressBar.increment()
+    progressBar.update(progress.fs.processedBytes)
+    // console.log(`${(progress.fs.processedBytes / dirSize) * 100}%`)
+    if (progress.fs.processedBytes >= dirSize) progressBar.stop()
+  })
   archive.finalize()
 }
 

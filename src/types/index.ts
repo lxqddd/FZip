@@ -4,3 +4,9 @@ export interface ICompressParams {
   level: number
   outputFileName: string
 }
+
+export interface IFillObj {
+  size: number
+  name: string
+  path: string
+}

@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import argv from 'minimist'
-import { ICompressParams } from '../types'
+import { ICompressParams, IFillObj } from '../types'
 
 export const pwd = process.cwd()
 
@@ -42,7 +42,7 @@ export function getDirName(pathName: string) {
 
 export function formatCompressParams(argv: argv.ParsedArgs): ICompressParams {
   const {
-    f: inputPathName,
+    f: inputPathName = argv.f || argv._[0],
     o: outputPathName = argv.o || getDirName(inputPathName),
     l: level = 6,
     n: outputFileName = argv.n || getFileName(inputPathName)
@@ -54,4 +54,35 @@ export function formatCompressParams(argv: argv.ParsedArgs): ICompressParams {
     level,
     outputFileName
   }
+}
+
+function getDirSubFilesInfo(path: string, filesList: IFillObj[]) {
+  const files = fs.readdirSync(path)
+  function walk(file: string) {
+    const states = fs.statSync(`${path}/${file}`)
+    if (states.isDirectory()) {
+      getDirSubFilesInfo(`${path}/${file}`, filesList)
+    } else {
+      const obj: IFillObj = {
+        size: 0,
+        name: '',
+        path: ''
+      }
+      obj.size = states.size
+      obj.name = file
+      obj.path = `${path}/${file}`
+      filesList.push(obj)
+    }
+  }
+  files.forEach(walk)
+}
+export function getDirSize(path: string) {
+  const filesList: IFillObj[] = []
+  getDirSubFilesInfo(path, filesList)
+  let totalSize = 0
+  for (let i = 0; i < filesList.length; i++) {
+    const item = filesList[i]
+    totalSize += item.size
+  }
+  return totalSize
 }

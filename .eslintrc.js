@@ -20,6 +20,7 @@ module.exports = {
     semi: [2, 'never'],
     'comma-dangle': [2, 'never'],
     'no-shadow': 'off',
+    'no-plusplus': 'off',
     'import/extensions': 'off',
     'import/no-unresolved': 'off'
   }
