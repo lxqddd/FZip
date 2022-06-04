@@ -56,20 +56,24 @@ pnpm install @lxqddd/fzip -g
 
 - 基础用法
 
-  - `fzip -f ./src`，指令执行之后会在 `src` 的同级目录输出一个 `src.zip` 的压缩包
+  - `fzip -f ./src`，指令执行之后会在 `src` 的同级目录输出一个 `src.zip` 的压缩包。
 
 - 指定输出位置
 
-  - `fzip -f ./src -o ~/Desktop`，指令执行之后会在桌面上输出一个 `src.zip` 的压缩包
+  - `fzip -f ./src -o ~/Desktop`，指令执行之后会在桌面上输出一个 `src.zip` 的压缩包。
 
 - 指定压缩等级
 
-  - `fzip -f ./src -o ~/Desktop -l 9`，压缩产物的压缩级别为 9
+  - `fzip -f ./src -o ~/Desktop -l 9`，压缩产物的压缩级别为 9。
 
 - 重命名
-  - `fzip -f ./src -n test`，指令执行之后会在 `src` 的通级目录下输出一个名为 `test.zip` 的压缩包
 
-> 上边说的都是压缩目录的，也可以压缩单个文件，使用方法类似，只需要将输入路径指向被压缩的目标文件即可
+  - `fzip -f ./src -n test`，指令执行之后会在 `src` 的同级目录下输出一个名为 `test.zip` 的压缩包。
+
+- 不指定参数
+  - `fzip ./src`，指令执行之后会在 `src` 的同级目录下输出一个名为 `src.zip` 的压缩包，这是一种懒惰的做法，我不建议这么做！如果在指令后边跟了多个路径，则默认制取第一个。
+
+> 上边说的都是压缩目录的，也可以压缩单个文件，使用方法类似，只需要将输入路径指向被压缩的目标文件即可。
 
 - 压缩单个文件
-  - `fzip -f ./src/cli.ts -o ~/Desktop -n test -l 9`，指令执行之后会在桌面输出一个名为 `test.zip` 的压缩包
+  - `fzip -f ./src/cli.ts -o ~/Desktop -n test -l 9`，指令执行之后会在桌面输出一个名为 `test.zip` 的压缩包。
