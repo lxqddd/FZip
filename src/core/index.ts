@@ -25,6 +25,7 @@ function compressSingleFile(compressParams: ICompressParams) {
     name: getFileNameWithExt(compressParams.inputPathName)
   })
   archive.finalize()
+  console.log(`输出位置：${ansiColors.yellow(destPath)}`)
 }
 
 function compressDir(compressParams: ICompressParams) {
@@ -47,12 +48,19 @@ function compressDir(compressParams: ICompressParams) {
     barIncompleteChar: '\u2591',
     hideCursor: true
   })
+  let lock = false
   progressBar.start(dirSize, 0)
   archive.on('progress', (progress) => {
     progressBar.increment()
     progressBar.update(progress.fs.processedBytes)
-    // console.log(`${(progress.fs.processedBytes / dirSize) * 100}%`)
-    if (progress.fs.processedBytes >= dirSize) progressBar.stop()
+    if (progress.fs.processedBytes >= dirSize) {
+      progressBar.stop()
+      if (!lock) {
+        // 这里这么写的原因是有是有实际压缩的文件大小会比读取到的大，原因暂时还不知道是为啥
+        console.log(`输出位置：${ansiColors.yellow(destPath)}`)
+        lock = true
+      }
+    }
   })
   archive.finalize()
 }
