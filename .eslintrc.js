@@ -22,6 +22,7 @@ module.exports = {
     'no-shadow': 'off',
     'no-plusplus': 'off',
     'import/extensions': 'off',
-    'import/no-unresolved': 'off'
+    'import/no-unresolved': 'off',
+    'prefer-destructuring': 'off'
   }
 }

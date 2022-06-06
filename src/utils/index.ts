@@ -2,6 +2,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import argv from 'minimist'
 import { ICompressParams, IFillObj } from '../types'
+import pkg from '../../package.json'
 
 export const pwd = process.cwd()
 
@@ -41,8 +42,16 @@ export function getDirName(pathName: string) {
 }
 
 export function formatCompressParams(argv: argv.ParsedArgs): ICompressParams {
+  console.log(argv)
+  let inputPathName = ''
+  if (argv.f) {
+    inputPathName = argv.f
+  } else if (!argv._[0] || !fs.existsSync(resolvePath(argv._[0]))) {
+    throw new Error('parameter exception! Please specify compression object')
+  } else {
+    inputPathName = argv._[0]
+  }
   const {
-    f: inputPathName = argv.f || argv._[0],
     o: outputPathName = argv.o || getDirName(inputPathName),
     l: level = 6,
     n: outputFileName = argv.n || getFileName(inputPathName)
@@ -56,7 +65,7 @@ export function formatCompressParams(argv: argv.ParsedArgs): ICompressParams {
   }
 }
 
-function getDirSubFilesInfo(path: string, filesList: IFillObj[]) {
+export function getDirSubFilesInfo(path: string, filesList: IFillObj[]) {
   const files = fs.readdirSync(path)
   function walk(file: string) {
     const states = fs.statSync(`${path}/${file}`)
@@ -85,4 +94,8 @@ export function getDirSize(path: string) {
     totalSize += item.size
   }
   return totalSize
+}
+
+export function getVersion() {
+  return `version: ${pkg.version}`
 }
