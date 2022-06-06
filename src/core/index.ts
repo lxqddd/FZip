@@ -48,19 +48,16 @@ function compressDir(compressParams: ICompressParams) {
     barIncompleteChar: '\u2591',
     hideCursor: true
   })
-  let lock = false
   progressBar.start(dirSize, 0)
   archive.on('progress', (progress) => {
     progressBar.increment()
     progressBar.update(progress.fs.processedBytes)
-    if (progress.fs.processedBytes >= dirSize) {
-      progressBar.stop()
-      if (!lock) {
-        // 这里这么写的原因是有是有实际压缩的文件大小会比读取到的大，原因暂时还不知道是为啥
-        console.log(`输出位置：${ansiColors.yellow(destPath)}`)
-        lock = true
-      }
-    }
+  })
+  archive.on('finish', () => {
+    progressBar.increment()
+    progressBar.update(dirSize)
+    progressBar.stop()
+    console.log(`输出位置：${ansiColors.yellow(destPath)}`)
   })
   archive.finalize()
 }
