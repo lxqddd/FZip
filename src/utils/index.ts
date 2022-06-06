@@ -42,7 +42,6 @@ export function getDirName(pathName: string) {
 }
 
 export function formatCompressParams(argv: argv.ParsedArgs): ICompressParams {
-  console.log(argv)
   let inputPathName = ''
   if (argv.f) {
     inputPathName = argv.f
