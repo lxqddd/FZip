@@ -1,6 +1,6 @@
 {
   "name": "@lxqddd/fzip",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "一个将文件压缩为zip格式的命令行工具",
   "main": "dist/cli.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "tsc"
   },
   "bin": {
-    "fzip": "dist/cli.js"
+    "fzip": "dist/src/cli.js"
   },
   "files": [
     "dist/",
