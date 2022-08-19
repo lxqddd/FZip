@@ -1,4 +1,4 @@
-# FZip
+# FZip [![Build Status](https://travis-ci.org/audiojs/audio-play.svg?branch=master)](https://travis-ci.org/audiojs/audio-play)
 
 ## 项目介绍
 
@@ -6,23 +6,7 @@
 
 ## 使用方法
 
-- 使用 `npm` 安装
-
-```shell
-npm install @lxqddd/fzip -g
-```
-
-- 使用 `yarn` 安装
-
-```shell
-yarn install @lxqddd/fzip -g
-```
-
-- 使用 `pnpm` 安装
-
-```shell
-pnpm install @lxqddd/fzip -g
-```
+[![NPM](https://nodei.co/npm/npm.png?mini=true)](https://nodei.co/npm/npm/)
 
 ## 参数说明
 
