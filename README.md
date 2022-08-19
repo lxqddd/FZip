@@ -1,4 +1,4 @@
-# FZip [![Build Status](https://travis-ci.org/audiojs/audio-play.svg?branch=master)](https://travis-ci.org/audiojs/audio-play)
+# FZip
 
 ## 项目介绍
 
